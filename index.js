@@ -6,7 +6,7 @@ module.exports = function (param) {
 	"use strict";
 	var that;
 
-	includer.initialize();
+	includer.initialize(param);
 
 	function htmlincluder() {
 		includer.buildHtml(function(file) {
