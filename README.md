@@ -41,13 +41,6 @@ gulp.task('watch', function() {
 
 ## API
 
-### File naming convention
- gulp-html-ssi requires files follow a particular naming convention.
-
-Files that you want to include in other files begin with `_`.
-
-Files that you want to use to build the resulting static pages can be named however you want, as long as they don't begin with `_`.
-
 ### Include
 This is the simplest use case.  Simply put the following html comment
 
@@ -56,6 +49,46 @@ This is the simplest use case.  Simply put the following html comment
 or
 
 `<!-- #include virtual="_filename" -->`
+
+### Templating
+#### String replace
+
+`<!-- #include file="_filename" name="jason" job="developer"-->`
+
+```html
+<h1>{{name}}</h1>
+<p>{{job}}</p>
+```
+
+#### Conditional rendering
+
+`<!-- #include file="_filename" truevalue="true" -->`
+
+```html
+{{?truevalue}}
+	<p>Render this if true</p>
+{{:else}}
+	<p>else render this</p>
+{{/truevalue}}
+```
+
+#### arrays
+Can either take a comma seperated string or an object
+`<!-- #include file="_filename" colours="red,green,blue" -->`
+
+```html
+{{#colours}}
+	<p>{{value}}</p>
+{{/colours}}
+```
+
+`<!-- #include file="_filename" colours="[{'colour': 'red','hex':'#d0021b'},{'colour':'green','hex':'#40a22a'},{'colour':'blue','hex':'#193351'}]" -->`
+
+```html
+{{#colours}}
+	<p>{{colour}}: {{hex}}</p>
+{{/colours}}
+```
 
 #### Example
 
