@@ -8,13 +8,14 @@ module.exports = function (param) {
 
 	includer.initialize(param);
 
-	function htmlincluder() {
+	function htmlincluder(callback) {
 		includer.buildHtml(function(file) {
 			var f = file.file;
 			f.contents = new Buffer(file.content);
 
     		that.push(f);
 		});
+		callback();
 	}
 
 	function aggregateFiles(file, enc, callback) {
